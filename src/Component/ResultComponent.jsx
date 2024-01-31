@@ -4,11 +4,7 @@ import "./ResultComponent.css"
 import { Link } from "react-router-dom";
 
 export default function ResultComponent(){
-
-  // added new
   const location = useLocation();
-  console.log(location)
-
   return(
     <div className="result">
       <h1>Result</h1>
@@ -30,7 +26,6 @@ export default function ResultComponent(){
           </div>
         </div>
       </div>
-
       <div className="buttons">
         <Link to="/play-quiz"><button className="play">Play Again</button></Link>
         <Link to="/"><button className="home-result">Back to home</button></Link>

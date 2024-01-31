@@ -21,11 +21,9 @@ export default class QuizComponent extends Component{
       answer:''
     }
   }
-
   componentDidMount(){
     this.displayQuestion(this.state.questions, this.state.currentQuestion, this.state.nextQuestion, this.state.prevQuestion);
   }
-
   displayQuestion = (questions=this.state.questions, currentQuestion, nextQuestion, prevQuestion)=>{
     let {currentQuestionIndex} = this.state;
     if(this.state.questions.length!==0){
@@ -47,7 +45,6 @@ export default class QuizComponent extends Component{
 
     }
   }
-
   handleNextButtonClick = ()=>{
     if(this.state.nextQuestion!==undefined){
       this.setState(prevState=>({
@@ -57,7 +54,6 @@ export default class QuizComponent extends Component{
       })
     }
   }
-
   handlePrevButtonClick = ()=>{
     if(this.state.prevQuestion!==undefined){
       this.setState(prevState=>({
@@ -67,15 +63,6 @@ export default class QuizComponent extends Component{
       })
     }
   }
-
-  handleQuitButtonClick = ()=>{
-    
-    if(window.confirm("Are you sure you want to quit?")){
-      window.location.reload(false)
-    }
-  }
-
-  //added new
   handleOptionClick =(e)=>{
     if(e.target.innerHTML.toLowerCase() === this.state.answer.toLowerCase()){
       this.correctAnswer();
@@ -84,8 +71,6 @@ export default class QuizComponent extends Component{
       this.wrongAnswer();
     }
   }
-
-  // added new
   correctAnswer = ()=>{
     this.setState(prevstate => ({ 
       score: prevstate.score + 1, 
@@ -94,12 +79,9 @@ export default class QuizComponent extends Component{
       numberofAnsweredQuestions: prevstate.numberofAnsweredQuestions+ 1}),()=>{
         this.displayQuestion(this.state.questions, this.state.currentQuestion, this.state.nextQuestion, this.state.prevQuestion);
       })
-
     alert("correct answer")
     
   }
-
-  // added new
   wrongAnswer = ()=>{
     this.setState(prevstate => ({
       wrongAnswers: prevstate.wrongAnswers + 1,
@@ -111,41 +93,32 @@ export default class QuizComponent extends Component{
 
     alert("wrong answer")
   }
-
   render(){
     console.log(this.state.correctAnswers)
     const {currentQuestion} = this.state;
     return(
       <div className="question">
         <h2>Question</h2>
-
         <div>
-          {/* updated this span */}
           <span>{this.state.currentQuestionIndex+1} of {this.state.questions.length}</span>
           <h3>{currentQuestion.question}</h3>
         </div>
-
         <div className="option-container">
           <p onClick={this.handleOptionClick} className="option">{currentQuestion.optionB}</p>
           <p onClick={this.handleOptionClick} className="option">{currentQuestion.optionA}</p>
         </div>
-
         <div className="option-container">
           <p onClick={this.handleOptionClick} className="option">{currentQuestion.optionC}</p>
           <p onClick={this.handleOptionClick} className="option">{currentQuestion.optionD}</p>
         </div>
-
         <div className="button-container">
           <button className="button previous" onClick={this.handlePrevButtonClick}>Previous</button>
           <button className="button next" onClick={this.handleNextButtonClick}>Next</button>
-          <button className="button quit" onClick={this.handleQuitButtonClick}>Quit</button>
-          <Link to="/result" state={{answeredQuestions:this.state.numberofAnsweredQuestions,score:this.state.score,correctAnswer:this.state.correctAnswers,totalQuestions:this.state.questions.length, wrongAnswer:this.state.wrongAnswers}}><button>Finish
+          <Link to="/"><button className="button quit">Quit</button></Link>
+          <Link to="/result"  state={{answeredQuestions:this.state.numberofAnsweredQuestions,score:this.state.score,correctAnswer:this.state.correctAnswers,totalQuestions:this.state.questions.length, wrongAnswer:this.state.wrongAnswers}}><button>Finish
           </button>
           </Link>
-        </div>
-
-
-        
+        </div>       
       </div>
     )
   }
