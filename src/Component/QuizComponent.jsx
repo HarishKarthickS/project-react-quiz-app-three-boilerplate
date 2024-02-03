@@ -31,15 +31,12 @@ export default class QuizComponent extends Component{
       currentQuestion = questions[currentQuestionIndex];
       nextQuestion = questions[currentQuestionIndex+1];
       prevQuestion = questions[currentQuestionIndex-1];
-
-      // added new
       const answer = currentQuestion.answer;
 
       this.setState({
         currentQuestion,
         nextQuestion,
         prevQuestion,
-        // added new
         answer
       })
 
